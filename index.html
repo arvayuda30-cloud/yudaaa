@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Layar Putih Murni</title>
+    <style>
+        /* GLOBAL RESET: Hapus semua margin, padding, border, background, efek */
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: 0;
+            font-size: 100%;
+            vertical-align: baseline;
+            background: transparent;
+            box-shadow: none;
+            text-decoration: none;
+            list-style: none;
+            box-sizing: border-box;
+        }
+
+        /* HTML dan BODY dipastikan hanya putih polos, tanpa scrollbar yang mengganggu jika memungkinkan */
+        html, body {
+            width: 100%;
+            height: 100%;
+            /* warna putih absolut */
+            background-color: #ffffff;
+            /* tidak ada gambar background, tidak ada gradient */
+            background-image: none;
+            /* halaman tidak memiliki scroll horizontal (opsional untuk pengalaman bersih) */
+            overflow-x: hidden;
+            /* scroll vertikal tetap ada jika konten (tidak ada konten) namun tidak akan muncul karena body kosong */
+            overflow-y: auto; 
+            /* reset margin dan padding lagi pastikan 0 */
+            margin: 0;
+            padding: 0;
+            /* font apapun tidak diperlukan karena tidak ada teks, namun untuk konsistensi kita reset */
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            /* tidak ada warna teks yang muncul, karena tidak ada teks */
+            color: #000000; /* tidak terlihat, tapi tidak masalah */
+        }
+
+        /* Untuk keandalan: target semua kemungkinan elemen yang mungkin ditambahkan oleh browser atau ekstensi (tapi tidak akan ada) */
+        /* tetap amankan body agar tidak ada pseudo-element yang menghasilkan titik */
+        body::before,
+        body::after,
+        html::before,
+        html::after {
+            display: none !important;
+            content: none !important;
+        }
+
+        /* Karena kita ingin kondisi absolut putih total, pastikan jika ada elemen (tidak ada) tidak memiliki efek. */
+        /* Blokir segala kemungkinan outline aneh atau fokus pada body */
+        body:focus, html:focus {
+            outline: none;
+        }
+
+        /* Hilangkan scrollbar pada beberapa browser jika muncul karena potensi overflow? 
+           Tapi body kosong, tinggi 100%, margin 0 -> tidak akan ada scroll. Namun user bisa scroll dengan trackpad, 
+           tidak akan terlihat perbedaan. Tidak ada konten -> tidak ada scrolling yang berarti.
+           Untuk pengalaman sempurna, kita bisa juga menyembunyikan scrollbar? Tapi itu mengubah perilaku asli “layar putih”
+           yang hanya berisi putih. Sebaiknya scroll tetap ada namun tidak ada konten, sehingga tidak mengganggu.
+           Tetapi beberapa pengguna mungkin melihat bilah scroll kosong yang tidak berfungsi. Karena tidak ada konten, scrollbar tidak muncul di browser modern (karena body height = 100% dan tidak ada konten yang melebihi).
+        */
+        
+        /* Pastikan tidak ada CSS yang menambahkan bayangan, border atau apapun */
+        a, div, section, main, article, header, footer, nav, aside, p, span, h1, h2, h3, h4, h5, h6, button, input {
+            all: unset; /* tidak akan digunakan karena tidak ada elemen2 tersebut, tapi amankan jika ada yang muncul gara2 bug */
+            display: none;
+        }
+
+        /* Tidak ada content sama sekali. Blockquote, pre, code, semua irrelevan. */
+        /* Kita juga secara eksplisit membunuh pseudo scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+        
+        /* Opsi untuk Firefox : scrollbar width thin? Tapi lebih baik tidak muncul */
+        /* Agar scrollbar benar-benar tidak tampak (karena tidak diperlukan) namun tetap bisa di-scroll tanpa UI? Karena tidak ada konten yang meluap,
+           scrollbar tidak akan muncul. Jadi tidak masalah. Namun untuk memastikan tidak ada ruang scrollbar putih tambahan? Tidak ada.
+           Kita atur overflow pada html dan body: overflow: auto dan tidak ada konten maka scrollbar tidak akan dimunculkan.
+        */
+        /* Untuk keamanan ekstra, jika ada perilaku aneh dari browser (misal karena pseudo-elemen atau content property dari user agent) */
+        /* tidak ada satupun teks atau elemen */
+    </style>
+    <!-- TIDAK ADA JAVASCRIPT APAPUN, KARENA ITU BISA MENULIS KE LAYAR ATAU MENGUBAH DOKUMEN. -->
+    <!-- HANYA LAYAR PUTIH MURNI. TIDAK ADA KONTEN TEXT, TIDAK ADA GAMBAR, TIDAK ADA IFRAME, TIDAK ADA APAPUN. -->
+</head>
+<body>
+    <!-- KOSONG TOTAL: TIDAK ADA SATUPUN TAG ATAU TEKS. Bahkan spasi atau komentar HTML juga tidak seharusnya karena spasi kadang menghasilkan text node? Namun spasi dan baris baru diantara tag body dianggap text node kosong, tetapi karena tidak ada isi teks yang visible, namun tetap ada whitespace? 
+         White space (karakter newline) dalam HTML akan menghasilkan text node yang berisi spasi atau newline. Meskipun tidak terlihat secara visual, secara teknis ada node text dengan whitespace. Tapi whitespace hanya akan membuat tinggi elemen inline? Tidak: karena whitespace di dalam body akan menghasilkan konten yang biasanya tidak terlihat namun dapat mempengaruhi layout minimal jika ada style? Karena tidak memiliki tinggi atau lebar, whitespace hanya like karakter spasi yang tidak memiliki latar belakang. Tapi whitespace tidak mengubah warna latar. 
+         Namun untuk “Layar putih PURE absolut”, kita harus pastikan TIDAK ADA SATUPUN KARAKTER, BAHKAN SPASI ATAU NEWLINE DI DALAM BODY. Maka antara tag pembuka <body> dan tag penutup </body>, tidak ada satu karakter pun, termasuk spasi, tab, atau baris baru. Dalam kode di editor, baris baru setelah <body> ada? Iya, karena kita tulis <body> lalu newline lalu indentasi? Biasanya untuk memudahkan baca, ada baris baru. Mari kita pastikan sekarang: di dalam body SANGAT KOSONG tanpa spasi ekstra. 
+         Untuk keamanan, kita hilangkan semua spasi di dalam body. 
+    --><!--Tidak ada spasi--></body>
+</html>
